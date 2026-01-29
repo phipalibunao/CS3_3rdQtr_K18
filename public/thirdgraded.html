@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Applications</title>
+  <link rel="icon" type="image/png" href="assets/cspmlprojfavicon4.png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: 'Poppins', sans-serif;
+      color: #355f2e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* BLURRED BACKGROUND */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('assets/q3port.png') no-repeat center center;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      background-color: rgba(255, 252, 232, 0.9);
+      padding: 30px;
+      border-right: 4px dashed #f2c94c;
+    }
+
+    .sidebar h2 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.9rem;
+      color: #f2a900;
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #355f2e;
+      padding: 8px 12px;
+      display: block;
+      background-color: #fdf7d6;
+      border: 2px dashed transparent;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar ul li a:hover {
+      border: 2px dashed #f2c94c;
+      background-color: #fff1a8;
+      transform: translateX(5px);
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      flex: 1;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.6rem;
+      color: #2d6a9f;
+      margin-bottom: 15px;
+    }
+
+    .filter-box {
+      background: #fffef4;
+      padding: 15px;
+      border-radius: 10px;
+      border: 3px solid #5d4037;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    input[type="text"], select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 2px solid #5d4037;
+    }
+
+    button {
+      font-family: 'Press Start 2P', cursive;
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: 2px solid #5d4037;
+      background-color: #fbc02d;
+      cursor: pointer;
+      color: #355f2e;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #355f2e;
+      color: #fbc02d;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 2px solid #5d4037;
+    }
+
+    th {
+      background-color: #000080;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.6rem;
+      padding: 10px;
+      border: 1px solid black;
+      cursor: pointer;
+    }
+
+    td {
+      padding: 8px;
+      border: 1px solid black;
+      color: #355f2e;
+    }
+
+    tbody tr:nth-child(even) { background-color: #f9f9f9; }
+    tbody tr:hover { background-color: #fbc02d; color: black; }
+
+    .total-display {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      color: #355f2e;
+      margin-bottom: 10px;
+    }
+
+    @media(max-width: 768px){ table { display: block; overflow-x: auto; } }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>🍦MENU</h2>
+    <ul>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="./public/secondgraded.html">📋 Club Applications</a></li>
+      <li><a href="#">📧 Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <header>
+      <h1>View Club Applications</h1>
+      <p>See all students who have signed up</p>
+    </header>
+
+    <div class="filter-box">
+      <label>Filter by Club:</label>
+      <select id="clubFilter" onchange="loadData()">
+        <option value="All">--Select--</option>
+        <option value="Intyale">Intyale</option>
+        <option value="Karyo">Karyo</option>
+        <option value="Himig Agham">Himig Agham</option>
+        <option value="Kamalayan">Kamalayan</option>
+        <option value="Labuyo">Labuyo</option>
+      </select>
+
+      <label>Search Name:</label>
+      <input type="text" id="searchInput" placeholder="Type name..." onkeyup="loadData()">
+
+      <button onclick="resetFilter()">Reset</button>
+    </div>
+
+    <p class="total-display">Total Signups: <span id="count">0</span></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Club</th>
+          <th onclick="sortTable(1)">ID</th>
+          <th onclick="sortTable(2)">Fullname</th>
+          <th onclick="sortTable(3)">Grade</th>
+          <th onclick="sortTable(4)">Email</th>
+          <th onclick="sortTable(5)">Mobile</th>
+          <th onclick="sortTable(6)">Intern/Extern</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    function loadData() {
+      const tbody = document.getElementById('tableBody');
+      const countSpan = document.getElementById('count');
+      const filter = document.getElementById('clubFilter').value;
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const data = JSON.parse(localStorage.getItem('clubData')) || [];
+
+      const filtered = data.filter(s => (filter === "All" || s.club === filter) && s.name.toLowerCase().includes(search));
+      countSpan.innerText = filtered.length;
+
+      tbody.innerHTML = "";
+      if(filtered.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center'>No signups yet!</td></tr>";
+        return;
+      }
+
+      filtered.forEach(s => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${s.club}</td>
+            <td>${s.id}</td>
+            <td>${s.name}</td>
+            <td>${s.grade}</td>
+            <td>${s.email}</td>
+            <td>${s.mobile}</td>
+            <td>${s.type}</td>
+          </tr>`;
+      });
+    }
+
+    function resetFilter() {
+      document.getElementById('clubFilter').value = "All";
+      document.getElementById('searchInput').value = "";
+      loadData();
+    }
+
+    function sortTable(colIndex) {
+      const tbody = document.getElementById('tableBody');
+      const rows = Array.from(tbody.rows);
+      const ascending = tbody.getAttribute('data-sort') !== 'asc';
+
+      rows.sort((a,b) => {
+        const aText = a.cells[colIndex].innerText.toLowerCase();
+        const bText = b.cells[colIndex].innerText.toLowerCase();
+        if(!isNaN(aText) && !isNaN(bText)) return ascending ? aText - bText : bText - aText;
+        return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+      });
+
+      tbody.innerHTML = "";
+      rows.forEach(r => tbody.appendChild(r));
+      tbody.setAttribute('data-sort', ascending ? 'asc' : 'desc');
+    }
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>
