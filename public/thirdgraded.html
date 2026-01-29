@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>View Applications</title>
+  <title>View Club Applications</title>
   <link rel="icon" type="image/png" href="assets/cspmlprojfavicon4.png">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -14,17 +15,13 @@
       color: #355f2e;
       position: relative;
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('assets/q3port.png') no-repeat center center;
+      inset: 0;
+      background: url('assets/q3port.png') no-repeat center;
       background-size: cover;
       filter: blur(8px);
       z-index: -1;
@@ -48,7 +45,6 @@
     .sidebar ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
     }
 
     .sidebar ul li a {
@@ -57,12 +53,12 @@
       padding: 8px 12px;
       display: block;
       background-color: #fdf7d6;
-      border: 2px dashed transparent;
-      transition: all 0.3s ease;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      transition: 0.3s;
     }
 
     .sidebar ul li a:hover {
-      border: 2px dashed #f2c94c;
       background-color: #fff1a8;
       transform: translateX(5px);
     }
@@ -70,33 +66,30 @@
     .main {
       flex: 1;
       padding: 40px 60px;
-      display: flex;
-      flex-direction: column;
     }
 
     header h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.6rem;
       color: #2d6a9f;
-      margin-bottom: 15px;
     }
 
     .filter-box {
       background: #fffef4;
       padding: 15px;
       border-radius: 10px;
-      border: 3px solid #5d4037;
-      margin-bottom: 20px;
+      border: 3px dashed #cdeac0;
+      margin-bottom: 15px;
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
       align-items: center;
     }
 
-    input[type="text"], select {
+    select, input[type="text"] {
       padding: 8px;
       border-radius: 5px;
-      border: 2px solid #5d4037;
+      border: 2px solid #4CAF50;
       font-family: 'Poppins', sans-serif;
     }
 
@@ -105,105 +98,115 @@
       font-size: 0.7rem;
       padding: 10px 15px;
       border-radius: 5px;
-      border: 2px solid #5d4037;
-      background-color: #fbc02d;
+      border: none;
+      background-color: #f2ea00;
       cursor: pointer;
-      color: #355f2e;
     }
 
     button:hover {
-      background-color: #355f2e;
-      color: #fbc02d;
+      background-color: #00d1ff;
+      color: white;
+    }
+
+    .total-display {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       background: white;
-      border: 2px solid #5d4037;
-      margin-top: 10px;
+      border: 2px solid #355f2e;
     }
 
     th {
-      background-color: #000080;
+      background-color: #2d6a9f;
       color: white;
       font-family: 'Press Start 2P', cursive;
       font-size: 0.6rem;
       padding: 12px;
-      border: 1px solid black;
       cursor: pointer;
-      text-align: left;
-    }
-
-    th:hover {
-      background-color: #0000ff;
     }
 
     td {
       padding: 10px;
-      border: 1px solid black;
-      color: #355f2e;
+      border: 1px solid #355f2e;
       font-size: 0.9rem;
     }
 
     tbody tr:nth-child(even) { background-color: #f9f9f9; }
-    tbody tr:hover { background-color: #fbc02d; color: black; }
+    tbody tr:hover { background-color: #fff1a8; }
 
-    .total-display {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.8rem;
-      color: #355f2e;
-      margin-bottom: 15px;
-    }
+    /* Club colors */
+    .club-Alianti { background:#e1f5fe; }
+    .club-Bake\ Club { background:#fff3e0; }
+    .club-CARE { background:#e8f5e9; }
+    .club-Celluloid { background:#ede7f6; }
+    .club-Ellipsis { background:#fce4ec; }
+    .club-Exposure { background:#e0f2f1; }
+    .club-Invictus { background:#f3e5f5; }
+    .club-Karyo { background:#e3f2fd; }
+    .club-Kamalayan { background:#fffde7; }
+    .club-Labuyo { background:#ffebee; }
+    .club-Pallastro { background:#e0f7fa; }
+    .club-Sightlines { background:#f1f8e9; }
 
-    @media(max-width: 1024px){ 
-      .main { padding: 20px; }
-      table { display: block; overflow-x: auto; white-space: nowrap; }
+    @media(max-width: 900px){
+      table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 
 <body>
   <div class="sidebar">
-    <h2>🍦MENU</h2>
+    <h2>🍦 MENU</h2>
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="secondgraded.html">📋 Club Applications</a></li>
-      <li><a href="#">📧 Contact</a></li>
+      <li><a href="../index.html">🏠 Home</a></li>
+      <li><a href="secondgraded.html">📝 Application Form</a></li>
     </ul>
   </div>
 
   <div class="main">
     <header>
       <h1>View Club Applications</h1>
-      <p>See all students who have signed up</p>
+      <p>See all students who have signed up 📋</p>
     </header>
 
     <div class="filter-box">
-      <label>Filter by Club:</label>
+      <label>Club:</label>
       <select id="clubFilter" onchange="loadData()">
         <option value="All">--All Clubs--</option>
-        <option value="Intyale">Intyale</option>
-        <option value="Karyo">Karyo</option>
-        <option value="Himig Agham">Himig Agham</option>
-        <option value="Kamalayan">Kamalayan</option>
-        <option value="Labuyo">Labuyo</option>
+        <option>Alianti</option>
+        <option>Bake Club</option>
+        <option>CARE</option>
+        <option>Celluloid</option>
+        <option>Ellipsis</option>
+        <option>Exposure</option>
+        <option>Invictus</option>
+        <option>Karyo</option>
+        <option>Kamalayan</option>
+        <option>Labuyo</option>
+        <option>Pallastro</option>
+        <option>Sightlines</option>
       </select>
 
-      <label>Search Name:</label>
-      <input type="text" id="searchInput" placeholder="Type name..." onkeyup="loadData()">
+      <label>Name:</label>
+      <input type="text" id="searchInput" placeholder="Search name..." onkeyup="loadData()">
 
       <button onclick="resetFilter()">Reset</button>
     </div>
 
     <p class="total-display">Total Signups: <span id="count">0</span></p>
+    <p class="total-display" id="clubCounts"></p>
 
     <table>
       <thead>
         <tr>
           <th onclick="sortTable(0)">Club ↕</th>
           <th onclick="sortTable(1)">ID ↕</th>
-          <th onclick="sortTable(2)">Fullname ↕</th>
+          <th onclick="sortTable(2)">Name ↕</th>
           <th onclick="sortTable(3)">Grade ↕</th>
           <th onclick="sortTable(4)">Email ↕</th>
           <th onclick="sortTable(5)">Mobile ↕</th>
@@ -218,37 +221,43 @@
     function loadData() {
       const tbody = document.getElementById('tableBody');
       const countSpan = document.getElementById('count');
+      const clubCounts = document.getElementById('clubCounts');
+
       const filter = document.getElementById('clubFilter').value;
       const search = document.getElementById('searchInput').value.toLowerCase();
-      
+
       const data = JSON.parse(localStorage.getItem('clubData')) || [];
 
-      const filtered = data.filter(s => {
-        const matchesClub = (filter === "All" || s.club === filter);
-        const matchesName = s.name.toLowerCase().includes(search);
-        return matchesClub && matchesName;
-      });
+      const filtered = data.filter(s =>
+        (filter === "All" || s.club === filter) &&
+        s.name.toLowerCase().includes(search)
+      );
 
-      countSpan.innerText = filtered.length;
+      countSpan.textContent = filtered.length;
       tbody.innerHTML = "";
 
-      if(filtered.length === 0) {
+      if (!filtered.length) {
         tbody.innerHTML = "<tr><td colspan='7' style='text-align:center'>No signups found!</td></tr>";
-        return;
+      } else {
+        filtered.forEach(s => {
+          const row = `<tr class="club-${s.club.replace(/\s/g,'\\ ')}">
+            <td>${s.club}</td>
+            <td>${s.id}</td>
+            <td>${s.name}</td>
+            <td>${s.grade}</td>
+            <td>${s.email}</td>
+            <td>${s.mobile}</td>
+            <td>${s.type}</td>
+          </tr>`;
+          tbody.insertAdjacentHTML("beforeend", row);
+        });
       }
 
-      filtered.forEach(s => {
-        const row = `<tr>
-          <td>${s.club}</td>
-          <td>${s.id}</td>
-          <td>${s.name}</td>
-          <td>${s.grade}</td>
-          <td>${s.email}</td>
-          <td>${s.mobile}</td>
-          <td>${s.type}</td>
-        </tr>`;
-        tbody.insertAdjacentHTML('beforeend', row);
-      });
+      const counts = {};
+      data.forEach(s => counts[s.club] = (counts[s.club] || 0) + 1);
+      clubCounts.textContent = Object.entries(counts)
+        .map(([c,n]) => `${c}: ${n}`)
+        .join(" | ");
     }
 
     function resetFilter() {
@@ -257,25 +266,21 @@
       loadData();
     }
 
-    function sortTable(colIndex) {
-      const tbody = document.getElementById('tableBody');
+    function sortTable(col) {
+      const tbody = document.getElementById("tableBody");
       const rows = Array.from(tbody.rows);
-      if (rows.length <= 1 && rows[0].cells.length === 1) return;
+      const asc = tbody.dataset.sort !== "asc";
 
-      const ascending = tbody.getAttribute('data-sort-dir') !== 'asc';
-
-      rows.sort((a, b) => {
-        const aVal = a.cells[colIndex].innerText.toLowerCase();
-        const bVal = b.cells[colIndex].innerText.toLowerCase();
-        
-        return ascending 
-          ? aVal.localeCompare(bVal, undefined, {numeric: true}) 
-          : bVal.localeCompare(aVal, undefined, {numeric: true});
+      rows.sort((a,b)=>{
+        const A = a.cells[col].innerText.toLowerCase();
+        const B = b.cells[col].innerText.toLowerCase();
+        return asc ? A.localeCompare(B,undefined,{numeric:true}) :
+                     B.localeCompare(A,undefined,{numeric:true});
       });
 
       tbody.innerHTML = "";
-      rows.forEach(row => tbody.appendChild(row));
-      tbody.setAttribute('data-sort-dir', ascending ? 'asc' : 'desc');
+      rows.forEach(r=>tbody.appendChild(r));
+      tbody.dataset.sort = asc ? "asc" : "desc";
     }
 
     window.onload = loadData;

@@ -5,6 +5,7 @@
   <title>Club/Organization Application Form</title>
   <link rel="icon" type="image/png" href="assets/cspmlprojfavicon4.png">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -14,17 +15,13 @@
       color: #355f2e;
       position: relative;
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('assets/q3port.png') no-repeat center center;
+      inset: 0;
+      background: url('assets/q3port.png') no-repeat center;
       background-size: cover;
       filter: blur(8px);
       z-index: -1;
@@ -48,7 +45,6 @@
     .sidebar ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
     }
 
     .sidebar ul li a {
@@ -57,12 +53,12 @@
       padding: 8px 12px;
       display: block;
       background-color: #fdf7d6;
-      border: 2px dashed transparent;
-      transition: all 0.3s ease;
+      border-radius: 10px;
+      transition: 0.3s;
+      margin-bottom: 8px;
     }
 
     .sidebar ul li a:hover {
-      border: 2px dashed #f2c94c;
       background-color: #fff1a8;
       transform: translateX(5px);
     }
@@ -70,15 +66,12 @@
     .main {
       flex: 1;
       padding: 40px 80px;
-      display: flex;
-      flex-direction: column;
     }
 
     header h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.6rem;
       color: #2d6a9f;
-      margin-bottom: 15px;
     }
 
     section {
@@ -86,51 +79,37 @@
       padding: 25px;
       border-radius: 20px;
       border: 3px dashed #cdeac0;
-      margin-bottom: 40px;
+      margin-top: 25px;
     }
 
     section h2 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1rem;
       color: #f2a900;
-      margin-bottom: 15px;
     }
 
-    form label {
+    label {
       display: block;
-      margin: 10px 0;
-      font-size: 0.85rem;
-      font-weight: 500;
+      margin: 12px 0;
+      font-size: 0.9rem;
     }
 
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="email"],
-    select,
-    textarea {
+    input, select, textarea {
       width: 100%;
       padding: 8px;
-      border: 2px solid #4CAF50;
+      margin-top: 4px;
       border-radius: 6px;
-      background-color: #111;
-      color: #fff;
+      border: 2px solid #4CAF50;
       font-family: 'Press Start 2P', cursive;
       font-size: 0.7rem;
-      box-sizing: border-box;
+      background: #111;
+      color: white;
     }
 
-    input:focus,
-    select:focus,
-    textarea:focus {
+    input:focus, select:focus, textarea:focus {
+      outline: none;
       border-color: #00d1ff;
       box-shadow: 0 0 5px #00d1ff;
-      outline: none;
-    }
-
-    .error {
-      border-color: #ff0000 !important;
-      background-color: #330000 !important;
     }
 
     fieldset {
@@ -143,99 +122,107 @@
     legend {
       font-family: 'Press Start 2P', cursive;
       color: #00d1ff;
-      padding: 0 10px;
     }
 
     button {
       font-family: 'Press Start 2P', cursive;
       padding: 10px 20px;
-      margin-top: 10px;
       margin-right: 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      color: #111;
       background-color: #f2ea00;
-      text-shadow: 1px 1px #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     button:hover {
       background-color: #00d1ff;
-      color: #fff;
-      text-shadow: 1px 1px #000;
+      color: white;
     }
   </style>
 </head>
 
 <body>
   <div class="sidebar">
-    <h2>🍦MENU</h2>
+    <h2>🍦 MENU</h2>
     <ul>
-      <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="thirdgraded.html">📋 View Club Applications</a></li>
-      <li><a href="#">📧 Contact</a></li>
+      <li><a href="../index.html">🏠 Home</a></li>
+      <li><a href="thirdgraded.html">📋 View Applications</a></li>
     </ul>
   </div>
 
   <div class="main">
     <header>
       <h1>Club Application Form</h1>
-      <p>Fill out your details to join your preferred club 🎮</p>
+      <p>Fill out your details to join your preferred club‼️</p>
     </header>
 
     <section>
       <h2>📝 Application</h2>
-      <form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
-        
+
+      <form onsubmit="saveData(); return confirmSubmit();" onreset="return confirmReset();">
         <fieldset>
           <legend>Personal Information</legend>
-          <label>Student ID: <input type="number" name="studentID" required onblur="checkEmpty(this)"></label>
-          <label>Full Name: <input type="text" name="fullName" required onblur="checkEmpty(this)"></label>
-          <label>Birthday: <input type="date" name="birthday" required onblur="checkEmpty(this)"></label>
-          <label>Email Address: <input type="email" name="email" required onblur="checkEmpty(this)"></label>
+          <label>Student ID
+            <input type="number" name="studentID" required>
+          </label>
+
+          <label>Full Name
+            <input type="text" name="fullName" required>
+          </label>
+
+          <label>Birthday
+            <input type="date" name="birthday" required>
+          </label>
+
+          <label>Email
+            <input type="email" name="email" required>
+          </label>
         </fieldset>
 
         <fieldset>
           <legend>Additional Information</legend>
-          <label>Mobile Phone: <input type="text" name="mobile" required onblur="checkEmpty(this)"></label>
 
-          <label>Grade Level:
-            <select name="gradeLevel" required onblur="checkEmpty(this)">
+          <label>Mobile Phone
+            <input type="text" name="mobile" required>
+          </label>
+
+          <label>Grade Level
+            <select name="gradeLevel" required>
               <option value="">--Select--</option>
-              <option value="7">Grade 7</option>
-              <option value="8">Grade 8</option>
-              <option value="9">Grade 9</option>
-              <option value="10">Grade 10</option>
-              <option value="11">Grade 11</option>
-              <option value="12">Grade 12</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
             </select>
           </label>
 
-          <label>Intern / Extern:
-            <input type="radio" name="internExtern" value="intern" required> Intern
-            <input type="radio" name="internExtern" value="extern" required> Extern
+          <label>
+            <input type="radio" name="internExtern" value="Intern" required> Intern
+            <input type="radio" name="internExtern" value="Extern" required> Extern
           </label>
 
-          <label>Preferred Organization / Club:
-            <select name="club" required onblur="checkEmpty(this)">
+          <label>Preferred Club
+            <select name="club" required>
               <option value="">--Select--</option>
-              <option value="frisbee">Alianti</option>
-              <option value="baking">Bake Club</option>
-              <option value="environment">CARE</option>
-              <option value="film">Celluloid</option>
-              <option value="literature">Ellipsis</option>
-              <option value="photography">Exposure</option>
-              <option value="debate">Invictus</option>
-              <option value="biomed">Karyo</option>
-              <option value="theater">Kamalayan</option>
-              <option value="football">Labuyo</option>
-              <option value="basketball">Pallastro</option>
-              <option value="engtheater">Sightlines</option>
+              <option>Alianti</option>
+              <option>Bake Club</option>
+              <option>CARE</option>
+              <option>Celluloid</option>
+              <option>Ellipsis</option>
+              <option>Exposure</option>
+              <option>Invictus</option>
+              <option>Karyo</option>
+              <option>Kamalayan</option>
+              <option>Labuyo</option>
+              <option>Pallastro</option>
+              <option>Sightlines</option>
             </select>
           </label>
 
-          <label>Why do you want to join:
-            <textarea name="reason" required onblur="checkEmpty(this)"></textarea>
+          <label>Why do you want to join?
+            <textarea required></textarea>
           </label>
         </fieldset>
 
@@ -246,20 +233,30 @@
   </div>
 
   <script>
+    function saveData() {
+      const data = JSON.parse(localStorage.getItem("clubData")) || [];
+
+      const clubSelect = document.querySelector("select[name='club']");
+      const student = {
+        id: document.querySelector("input[name='studentID']").value,
+        name: document.querySelector("input[name='fullName']").value,
+        email: document.querySelector("input[name='email']").value,
+        mobile: document.querySelector("input[name='mobile']").value,
+        grade: document.querySelector("select[name='gradeLevel']").value,
+        type: document.querySelector("input[name='internExtern']:checked").value,
+        club: clubSelect.options[clubSelect.selectedIndex].text
+      };
+
+      data.push(student);
+      localStorage.setItem("clubData", JSON.stringify(data));
+    }
+
     function confirmSubmit() {
-      return confirm("Are you sure you want to submit the form?");
+      return confirm("Are you sure you want to submit?");
     }
 
     function confirmReset() {
-      return confirm("Are you sure you want to reset the form?");
-    }
-
-    function checkEmpty(element) {
-      if (!element.value) {
-        element.classList.add('error');
-      } else {
-        element.classList.remove('error');
-      }
+      return confirm("Are you sure you want to reset?");
     }
   </script>
 </body>
