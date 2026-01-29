@@ -4,22 +4,19 @@
   <meta charset="UTF-8">
   <title>Club/Organization Application Form</title>
   <link rel="icon" type="image/png" href="assets/cspmlprojfavicon4.png">
-
-  <!-- PIXEL + MODERN FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       font-family: 'Poppins', sans-serif;
       color: #355f2e;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
-    /* BLURRED BACKGROUND */
     body::before {
       content: "";
       position: fixed;
@@ -33,12 +30,12 @@
       z-index: -1;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 260px;
       background-color: rgba(255, 252, 232, 0.9);
       padding: 30px;
       border-right: 4px dashed #f2c94c;
+      min-height: 100vh;
     }
 
     .sidebar h2 {
@@ -70,13 +67,11 @@
       transform: translateX(5px);
     }
 
-    /* MAIN CONTENT */
     .main {
       flex: 1;
-      padding: 60px 80px;
+      padding: 40px 80px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
     }
 
     header h1 {
@@ -91,6 +86,7 @@
       padding: 25px;
       border-radius: 20px;
       border: 3px dashed #cdeac0;
+      margin-bottom: 40px;
     }
 
     section h2 {
@@ -114,13 +110,14 @@
     select,
     textarea {
       width: 100%;
-      padding: 6px;
+      padding: 8px;
       border: 2px solid #4CAF50;
       border-radius: 6px;
       background-color: #111;
       color: #fff;
       font-family: 'Press Start 2P', cursive;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
+      box-sizing: border-box;
     }
 
     input:focus,
@@ -128,11 +125,12 @@
     textarea:focus {
       border-color: #00d1ff;
       box-shadow: 0 0 5px #00d1ff;
+      outline: none;
     }
 
     .error {
       border-color: #ff0000 !important;
-      background-color: #330000;
+      background-color: #330000 !important;
     }
 
     fieldset {
@@ -145,11 +143,12 @@
     legend {
       font-family: 'Press Start 2P', cursive;
       color: #00d1ff;
+      padding: 0 10px;
     }
 
     button {
       font-family: 'Press Start 2P', cursive;
-      padding: 8px 15px;
+      padding: 10px 20px;
       margin-top: 10px;
       margin-right: 10px;
       border: none;
@@ -157,12 +156,13 @@
       cursor: pointer;
       color: #111;
       background-color: #f2ea00;
-      text-shadow: 1px 1px #000;
+      text-shadow: 1px 1px #fff;
     }
 
     button:hover {
       background-color: #00d1ff;
       color: #fff;
+      text-shadow: 1px 1px #000;
     }
   </style>
 </head>
@@ -171,8 +171,8 @@
   <div class="sidebar">
     <h2>🍦MENU</h2>
     <ul>
-      <li><a href="#">🏠 Home</a></li>
-      <li><a href="#">📋 Club List</a></li>
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="thirdgraded.html">📋 View Club Applications</a></li>
       <li><a href="#">📧 Contact</a></li>
     </ul>
   </div>
@@ -187,7 +187,6 @@
       <h2>📝 Application</h2>
       <form method="post" action="submit" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
         
-        <!-- Personal Info -->
         <fieldset>
           <legend>Personal Information</legend>
           <label>Student ID: <input type="number" name="studentID" required onblur="checkEmpty(this)"></label>
@@ -196,7 +195,6 @@
           <label>Email Address: <input type="email" name="email" required onblur="checkEmpty(this)"></label>
         </fieldset>
 
-        <!-- Additional Info -->
         <fieldset>
           <legend>Additional Information</legend>
           <label>Mobile Phone: <input type="text" name="mobile" required onblur="checkEmpty(this)"></label>
