@@ -3,33 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Loading...</title>
-  <link rel="icon" type="image/png" href="assets/cspmlprojfavicon4.png">
+  <link rel="icon" type="image/png" href="../assets/loadingbg.png">
 
-  <!-- PIXEL + MODERN FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    html, body {
       margin: 0;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: url('../assets/loadingbg.png') center / cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Poppins', sans-serif;
-      color: #355f2e;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* BLURRED BACKGROUND */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url('assets/q3port.png') no-repeat center center;
-      background-size: cover;
-      filter: blur(10px);
-      z-index: -1;
     }
 
     .loading-box {
@@ -44,16 +34,16 @@
     .loading-text {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.4rem;
-      color: #2d6a9f;
-      text-shadow: 
+      animation: blink 1.4s infinite;
+      transition: color 0.6s ease;
+      text-shadow:
         1px 1px 2px white,
        -1px -1px 2px white;
-      animation: blink 1.4s infinite;
     }
 
     @keyframes blink {
-      0%   { opacity: 1; }
-      50%  { opacity: 0.4; }
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
       100% { opacity: 1; }
     }
   </style>
@@ -61,7 +51,17 @@
 
 <body>
   <div class="loading-box">
-    <div class="loading-text">LOADING..</div>
+    <div class="loading-text" id="loadingText">LOADING..</div>
   </div>
+
+  <script>
+    const colors = ["#355f2e", "#f2c94c", "#2d6a9f"];
+    const loadingText = document.getElementById("loadingText");
+
+    setInterval(() => {
+      loadingText.style.color =
+        colors[Math.floor(Math.random() * colors.length)];
+    }, 1200);
+  </script>
 </body>
 </html>
