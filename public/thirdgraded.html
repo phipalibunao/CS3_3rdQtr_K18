@@ -16,24 +16,92 @@
       color: #355f2e;
       position: relative;
       overflow-x: hidden;
+      background: linear-gradient(to bottom, #fff9c4, #fffde7);
     }
 
-    body::before {
-      content: "";
+    .petal {
       position: fixed;
-      inset: 0;
-      background: url('assets/q3port.png') no-repeat center;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: -1;
+      top: -20px;
+      width: 10px;
+      height: 10px;
+      background: pink;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0.6;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    .computer {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 120px;
+      height: 90px;
+      background: #dcdcdc;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: floatComp 5s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    .screen {
+      width: 90px;
+      height: 50px;
+      background: #111;
+      margin: 10px auto;
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 0 15px #00ffcc;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .screen::after {
+      content: "loading data...";
+      color: #00ffcc;
+      font-size: 7px;
+      font-family: 'Press Start 2P', cursive;
+      position: absolute;
+      top: 18px;
+      left: 6px;
+      animation: blink 1s infinite;
+    }
+
+    .stand {
+      width: 40px;
+      height: 10px;
+      background: #bbb;
+      margin: auto;
+      border-radius: 3px;
+    }
+
+    @keyframes floatComp {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 5px #00ffcc; }
+      to { box-shadow: 0 0 20px #00ffcc; }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.3; }
     }
 
     .sidebar {
       width: 260px;
-      background-color: rgba(255, 252, 232, 0.9);
+      background-color: rgba(255, 252, 232, 0.95);
       padding: 30px;
       border-right: 4px dashed #f2c94c;
       min-height: 100vh;
+      z-index: 2;
     }
 
     .sidebar h2 {
@@ -67,16 +135,25 @@
     .main {
       flex: 1;
       padding: 40px 60px;
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.6rem;
       color: #2d6a9f;
+      animation: floatTitle 4s ease-in-out infinite;
+    }
+
+    @keyframes floatTitle {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
     }
 
     .filter-box {
-      background: #fffef4;
+      background: rgba(255,255,255,0.85);
       padding: 15px;
       border-radius: 10px;
       border: 3px dashed #cdeac0;
@@ -85,6 +162,7 @@
       gap: 15px;
       flex-wrap: wrap;
       align-items: center;
+      backdrop-filter: blur(4px);
     }
 
     select, input[type="text"] {
@@ -102,11 +180,18 @@
       border: none;
       background-color: #f2ea00;
       cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 0 #c8c200;
     }
 
     button:hover {
       background-color: #00d1ff;
       color: white;
+    }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #888;
     }
 
     .total-display {
@@ -120,6 +205,12 @@
       border-collapse: collapse;
       background: white;
       border: 2px solid #355f2e;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     th {
@@ -140,20 +231,6 @@
     tbody tr:nth-child(even) { background-color: #f9f9f9; }
     tbody tr:hover { background-color: #fff1a8; }
 
-    /* Club colors */
-    .club-Alianti { background:#e1f5fe; }
-    .club-Bake\ Club { background:#fff3e0; }
-    .club-CARE { background:#e8f5e9; }
-    .club-Celluloid { background:#ede7f6; }
-    .club-Ellipsis { background:#fce4ec; }
-    .club-Exposure { background:#e0f2f1; }
-    .club-Invictus { background:#f3e5f5; }
-    .club-Karyo { background:#e3f2fd; }
-    .club-Kamalayan { background:#fffde7; }
-    .club-Labuyo { background:#ffebee; }
-    .club-Pallastro { background:#e0f7fa; }
-    .club-Sightlines { background:#f1f8e9; }
-
     @media(max-width: 900px){
       table { display: block; overflow-x: auto; }
     }
@@ -161,6 +238,18 @@
 </head>
 
 <body>
+
+  <div class="petal" style="left:10%; animation-duration:10s;"></div>
+  <div class="petal" style="left:30%; animation-duration:14s;"></div>
+  <div class="petal" style="left:50%; animation-duration:12s;"></div>
+  <div class="petal" style="left:70%; animation-duration:16s;"></div>
+  <div class="petal" style="left:90%; animation-duration:18s;"></div>
+
+  <div class="computer">
+    <div class="screen"></div>
+    <div class="stand"></div>
+  </div>
+
   <div class="sidebar">
     <h2>🍦 MENU</h2>
     <ul>

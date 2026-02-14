@@ -16,31 +16,111 @@
       color: #355f2e;
       position: relative;
       overflow-x: hidden;
+      background: linear-gradient(to bottom, #fff9c4, #fffde7);
     }
 
-    body::before {
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    .cloud::before,
+    .cloud::after {
       content: "";
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud1 {
+      width: 160px;
+      height: 50px;
+      top: 10%;
+      left: -200px;
+      animation: moveCloud 70s linear infinite;
+    }
+
+    .cloud1::before {
+      width: 80px;
+      height: 80px;
+      top: -35px;
+      left: 20px;
+    }
+
+    .cloud1::after {
+      width: 90px;
+      height: 90px;
+      top: -40px;
+      right: 20px;
+    }
+
+    .cloud2 {
+      width: 120px;
+      height: 45px;
+      top: 40%;
+      left: -180px;
+      animation: moveCloud 100s linear infinite;
+    }
+
+    .cloud2::before {
+      width: 60px;
+      height: 60px;
+      top: -25px;
+      left: 15px;
+    }
+
+    .cloud2::after {
+      width: 70px;
+      height: 70px;
+      top: -30px;
+      right: 15px;
+    }
+
+    @keyframes moveCloud {
+      from { transform: translateX(0); }
+      to { transform: translateX(200vw); }
+    }
+
+    .petal {
       position: fixed;
-      inset: 0;
-      background: url('assets/q3port.png') no-repeat center;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: -1;
+      top: -20px;
+      width: 12px;
+      height: 12px;
+      background: pink;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      animation: fall linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
     }
 
     .sidebar {
       width: 260px;
-      background-color: rgba(255, 252, 232, 0.9);
+      background-color: rgba(255, 252, 232, 0.95);
       padding: 30px;
       border-right: 4px dashed #f2c94c;
       min-height: 100vh;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(4px);
     }
 
     .sidebar h2 {
       font-family: 'Press Start 2P', cursive;
       font-size: 0.9rem;
       color: #f2a900;
-      margin-bottom: 15px;
     }
 
     .sidebar ul {
@@ -67,26 +147,37 @@
     .main {
       flex: 1;
       padding: 40px 80px;
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 1.6rem;
       color: #2d6a9f;
+      animation: floatTitle 4s ease-in-out infinite;
+    }
+
+    @keyframes floatTitle {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
     }
 
     section {
-      background-color: #fffef4;
+      background-color: rgba(255, 255, 255, 0.85);
       padding: 25px;
       border-radius: 20px;
       border: 3px dashed #cdeac0;
       margin-top: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      animation: floatCard 6s ease-in-out infinite;
     }
 
-    section h2 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1rem;
-      color: #f2a900;
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
     }
 
     label {
@@ -105,12 +196,14 @@
       font-size: 0.7rem;
       background: #111;
       color: white;
+      transition: 0.3s;
     }
 
     input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #00d1ff;
-      box-shadow: 0 0 5px #00d1ff;
+      box-shadow: 0 0 10px #00d1ff;
+      transform: scale(1.02);
     }
 
     fieldset {
@@ -133,16 +226,34 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 0 #c8c200;
     }
 
     button:hover {
       background-color: #00d1ff;
       color: white;
     }
+
+    button:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #888;
+    }
   </style>
 </head>
 
 <body>
+
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+
+  <div class="petal" style="left:10%; animation-duration:10s;"></div>
+  <div class="petal" style="left:25%; animation-duration:14s;"></div>
+  <div class="petal" style="left:40%; animation-duration:12s;"></div>
+  <div class="petal" style="left:60%; animation-duration:16s;"></div>
+  <div class="petal" style="left:75%; animation-duration:13s;"></div>
+  <div class="petal" style="left:90%; animation-duration:18s;"></div>
+
   <div class="sidebar">
     <h2>🍦 MENU</h2>
     <ul>
@@ -204,24 +315,6 @@
             <input type="radio" name="internExtern" value="Extern" required> Extern
           </label>
 
-          <label>Preferred Club
-            <select name="club" required>
-              <option value="">--Select--</option>
-              <option>Alianti</option>
-              <option>Bake Club</option>
-              <option>CARE</option>
-              <option>Celluloid</option>
-              <option>Ellipsis</option>
-              <option>Exposure</option>
-              <option>Invictus</option>
-              <option>Karyo</option>
-              <option>Kamalayan</option>
-              <option>Labuyo</option>
-              <option>Pallastro</option>
-              <option>Sightlines</option>
-            </select>
-          </label>
-
           <label>Why do you want to join?
             <textarea required></textarea>
           </label>
@@ -233,32 +326,5 @@
     </section>
   </div>
 
-  <script>
-    function saveData() {
-      const data = JSON.parse(localStorage.getItem("clubData")) || [];
-
-      const clubSelect = document.querySelector("select[name='club']");
-      const student = {
-        id: document.querySelector("input[name='studentID']").value,
-        name: document.querySelector("input[name='fullName']").value,
-        email: document.querySelector("input[name='email']").value,
-        mobile: document.querySelector("input[name='mobile']").value,
-        grade: document.querySelector("select[name='gradeLevel']").value,
-        type: document.querySelector("input[name='internExtern']:checked").value,
-        club: clubSelect.options[clubSelect.selectedIndex].text
-      };
-
-      data.push(student);
-      localStorage.setItem("clubData", JSON.stringify(data));
-    }
-
-    function confirmSubmit() {
-      return confirm("Are you sure you want to submit?");
-    }
-
-    function confirmReset() {
-      return confirm("Are you sure you want to reset?");
-    }
-  </script>
 </body>
 </html>
