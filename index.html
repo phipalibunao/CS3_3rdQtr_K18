@@ -1,290 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>3rd Qtr Portfolio</title>
-  <link rel="icon" type="image/png" href="assets/peachlogo.png">
+<meta charset="UTF-8">
+<title>3rd Qtr Portfolio</title>
+<link rel="icon" type="image/png" href="assets/peachlogo.png">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+margin:0;
+height:100vh;
+font-family:'Poppins',sans-serif;
+background:url('assets/bgnew.png') no-repeat center center fixed;
+background-size:cover;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      font-family: 'Poppins', sans-serif;
-      color: #355f2e;
-      position: relative;
-      overflow: hidden;
-      animation: fadeIn 1.2s ease forwards;
-    }
+.boot-screen{
+position:fixed;
+inset:0;
+background:black;
+color:#00ff88;
+font-family:'Press Start 2P',cursive;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+animation:boot 2.5s forwards;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes boot{
+0%{opacity:1}
+80%{opacity:1}
+100%{opacity:0;visibility:hidden}
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
-                  url('assets/q3port.png') no-repeat center center;
-      background-size: cover;
-      filter: blur(8px);
-      z-index: -2;
-    }
+.desktop{
+position:relative;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-    .cloud {
-      position: absolute;
-      background: white;
-      border-radius: 50px;
-      opacity: 0.8;
-      z-index: -1;
-    }
+.heart{
+position:absolute;
+color:#ff2e63;
+font-size:20px;
+animation:blink 1.2s infinite alternate;
+}
 
-    .cloud::before,
-    .cloud::after {
-      content: "";
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-    }
+.h1{top:80px;right:200px;}
+.h2{top:80px;right:170px;animation-delay:.3s;}
+.h3{top:80px;right:140px;animation-delay:.6s;}
 
-    .cloud1 {
-      width: 180px;
-      height: 60px;
-      top: 10%;
-      left: -200px;
-      animation: moveCloud 60s linear infinite;
-    }
+@keyframes blink{
+from{opacity:.3;transform:scale(.9);}
+to{opacity:1;transform:scale(1.1);}
+}
 
-    .cloud1::before {
-      width: 90px;
-      height: 90px;
-      top: -40px;
-      left: 20px;
-    }
+.dino{
+position:absolute;
+bottom:60px;
+left:120px;
+font-size:50px;
+animation:breathe 3s ease-in-out infinite;
+}
 
-    .cloud1::after {
-      width: 100px;
-      height: 100px;
-      top: -50px;
-      right: 20px;
-    }
+@keyframes breathe{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
 
-    .cloud2 {
-      width: 140px;
-      height: 50px;
-      top: 35%;
-      left: -180px;
-      animation: moveCloud 80s linear infinite;
-    }
+.desktop-window{
+width:85%;
+max-width:1100px;
+height:85vh;
+background:#fffef4;
+border:4px solid #2d6a9f;
+box-shadow:10px 10px 0px rgba(0,0,0,.2);
+display:flex;
+flex-direction:column;
+position:absolute;
+animation:popIn .8s ease;
+}
 
-    .cloud2::before {
-      width: 70px;
-      height: 70px;
-      top: -30px;
-      left: 15px;
-    }
+@keyframes popIn{
+from{transform:scale(.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
 
-    .cloud2::after {
-      width: 80px;
-      height: 80px;
-      top: -35px;
-      right: 15px;
-    }
+.title-bar{
+background:#2d6a9f;
+color:white;
+font-family:'Press Start 2P',cursive;
+font-size:.6rem;
+padding:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:move;
+}
 
-    @keyframes moveCloud {
-      from { transform: translateX(0); }
-      to { transform: translateX(200vw); }
-    }
+.window-buttons span{
+display:inline-block;
+width:14px;
+height:14px;
+margin-left:6px;
+background:white;
+}
 
-    .sidebar {
-      width: 260px;
-      background-color: rgba(255, 252, 232, 0.95);
-      padding: 30px;
-      border-right: 4px dashed #f2c94c;
-      box-shadow: 6px 0 20px rgba(0, 0, 0, 0.08);
-      backdrop-filter: blur(6px);
-    }
+.window-content{
+flex:1;
+display:flex;
+overflow:hidden;
+}
 
-    .sidebar h2 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.9rem;
-      color: #f2a900;
-      margin-bottom: 15px;
-      text-shadow: 1px 1px 2px white;
-    }
+.sidebar{
+width:220px;
+background:#dbe9f4;
+border-right:3px solid black;
+padding:20px;
+}
 
-    .sidebar h3 {
-      margin-top: 25px;
-      font-size: 1.1rem;
-      color: #4f772d;
-      text-shadow: 1px 1px 2px white;
-    }
+.sidebar h2{
+font-family:'Press Start 2P',cursive;
+font-size:.8rem;
+margin-bottom:20px;
+}
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-    }
+.sidebar ul{
+list-style:none;
+padding:0;
+}
 
-    .sidebar ul li {
-      margin: 12px 0;
-    }
+.sidebar li{
+margin-bottom:15px;
+}
 
-    .sidebar ul li a {
-      text-decoration: none;
-      color: #355f2e;
-      padding: 8px 12px;
-      border-radius: 12px;
-      display: block;
-      background-color: #fdf7d6;
-      border: 2px dashed transparent;
-      transition: all 0.3s ease;
-    }
+.sidebar a{
+display:block;
+text-decoration:none;
+color:black;
+background:white;
+border:2px solid black;
+padding:8px;
+box-shadow:3px 3px 0px rgba(0,0,0,.2);
+transition:.3s;
+}
 
-    .sidebar ul li a:hover {
-      border: 2px dashed #f2c94c;
-      background-color: #fff1a8;
-      transform: translateX(6px) scale(1.03);
-      box-shadow: 0 4px 12px rgba(242, 201, 76, 0.4);
-    }
+.sidebar a:hover{
+transform:translateY(-3px);
+}
 
-    .main {
-      flex: 1;
-      padding: 60px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+.main{
+flex:1;
+padding:40px;
+overflow-y:auto;
+}
 
-    header h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1.6rem;
-      color: #2d6a9f;
-      margin-bottom: 15px;
-      text-shadow: 1px 1px 2px white;
-    }
+header h1{
+font-family:'Press Start 2P',cursive;
+font-size:1.2rem;
+margin-bottom:15px;
+}
 
-    header p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      animation: floatText 4s ease-in-out infinite;
-    }
+header p{
+font-size:1rem;
+margin-bottom:30px;
+animation:float 4s ease-in-out infinite;
+}
 
-    @keyframes floatText {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
-    }
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-5px);}
+100%{transform:translateY(0);}
+}
 
-    section {
-      background-color: #fffef4;
-      padding: 25px;
-      border-radius: 20px;
-      border: 3px dashed #cdeac0;
-      margin-bottom: 40px;
-      animation: floatSection 6s ease-in-out infinite;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+section{
+background:white;
+border:3px solid black;
+box-shadow:5px 5px 0px rgba(0,0,0,.2);
+padding:20px;
+margin-bottom:30px;
+animation:floatSoft 5s ease-in-out infinite;
+transition:.3s;
+}
 
-    section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
+section:hover{
+transform:translateY(-6px) scale(1.02);
+}
 
-    @keyframes floatSection {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-      100% { transform: translateY(0); }
-    }
+@keyframes floatSoft{
+0%{transform:translateY(0);}
+50%{transform:translateY(-4px);}
+100%{transform:translateY(0);}
+}
 
-    section h2 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1rem;
-      color: #f2a900;
-      margin-bottom: 15px;
-    }
+section h2{
+font-family:'Press Start 2P',cursive;
+font-size:.8rem;
+margin-bottom:15px;
+}
 
-    section p {
-      font-size: 1.15rem;
-      line-height: 1.8;
-    }
+footer{
+border-top:3px solid black;
+padding-top:20px;
+margin-top:30px;
+}
 
-    footer {
-      text-align: center;
-      padding-top: 20px;
-      border-top: 3px dashed #cdeac0;
-    }
+footer h3{
+font-family:'Press Start 2P',cursive;
+font-size:.8rem;
+margin-bottom:10px;
+}
 
-    footer h3 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.9rem;
-      color: #2d6a9f;
-      margin-bottom: 10px;
-    }
+footer a{
+color:black;
+text-decoration:none;
+}
 
-    footer a {
-      color: #355f2e;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-      color: #2d6a9f;
-    }
-
-    .copyright {
-      margin-top: 12px;
-      font-size: 0.95rem;
-      color: #4f772d;
-    }
-  </style>
+footer a:hover{
+text-decoration:underline;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
+<div class="boot-screen">Loading Portfolio...</div>
 
-  <div class="sidebar">
-    <h2>🍦TASKS</h2>
-    <nav>
-      <h3>📘 Graded Exercises</h3>
-      <ul>
-        <li><a href="./public/secondgraded.html">📁 2nd Graded Exercise</a></li>
-        <li><a href="./public/thirdgraded.html">📁 3rd Graded Exercise</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="desktop">
 
-  <div class="main">
-    <header>
-      <h1>3rd Quarter Portfolio</h1>
-      <p>learning log📓</p>
-    </header>
+<div class="heart h1">❤</div>
+<div class="heart h2">❤</div>
+<div class="heart h3">❤</div>
 
-    <section>
-      <h2>🫵👉 About Me</h2>
-      <p>
-        hi! i'm Phipa Libunao, a grade 9 student who loves performing, reading novels, watching movies, and writing poems. 
-        this is my third 'About Me' so by now you probably already know that 😄. 
-        this quarter, i’m excited to show my projects, learn new things, and keep exploring creative ways to express myself.
-      </p>
-    </section>
+<div class="dino">🦖</div>
 
-    <footer>
-      <h3>📬 Let’s Connect</h3>
-      <p>Email: <a href="mailto:b2029pmlibunao@pshs.edu.ph">b2029pmlibunao@pshs.edu.ph</a></p>
-      <div class="copyright">© 2025 Phipa Libunao 🍦 All rights reserved.</div>
-    </footer>
-  </div>
+<div class="desktop-window" id="window">
+
+<div class="title-bar" id="dragBar">
+Untitled - Paint
+<div class="window-buttons">
+<span></span><span></span><span></span>
+</div>
+</div>
+
+<div class="window-content">
+
+<div class="sidebar">
+<h2>🍦 TASKS</h2>
+<ul>
+<li><a href="./public/secondgraded.html">📁 2nd Graded</a></li>
+<li><a href="./public/thirdgraded.html">📁 3rd Graded</a></li>
+</ul>
+</div>
+
+<div class="main">
+<header>
+<h1>3rd Quarter Portfolio</h1>
+<p>learning log 📓</p>
+</header>
+
+<section>
+<h2>🫵👉 About Me</h2>
+<p>
+hi! i'm Phipa Libunao, a grade 9 student who loves performing, reading novels, watching movies, and writing poems.
+this quarter, i’m excited to show my projects, learn new things, and keep exploring creative ways to express myself.
+</p>
+</section>
+
+<footer>
+<h3>📬 Let’s Connect</h3>
+<p>Email: <a href="mailto:b2029pmlibunao@pshs.edu.ph">b2029pmlibunao@pshs.edu.ph</a></p>
+<div>© 2025 Phipa Libunao 🍦 All rights reserved.</div>
+</footer>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const windowEl=document.getElementById("window");
+const dragBar=document.getElementById("dragBar");
+let offsetX=0,offsetY=0,isDown=false;
+
+dragBar.addEventListener("mousedown",e=>{
+isDown=true;
+offsetX=e.clientX-windowEl.offsetLeft;
+offsetY=e.clientY-windowEl.offsetTop;
+});
+
+document.addEventListener("mouseup",()=>isDown=false);
+
+document.addEventListener("mousemove",e=>{
+if(!isDown)return;
+windowEl.style.left=e.clientX-offsetX+"px";
+windowEl.style.top=e.clientY-offsetY+"px";
+windowEl.style.position="absolute";
+});
+</script>
 
 </body>
 </html>
