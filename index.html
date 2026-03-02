@@ -26,15 +26,30 @@ background:black;
 color:#00ff88;
 font-family:'Press Start 2P',cursive;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:9999;
-animation:boot 2.5s forwards;
+animation:boot 3.5s forwards;
+}
+
+.boot-text{
+font-size:.7rem;
+margin-bottom:20px;
+}
+
+.terminal{
+font-size:.55rem;
+line-height:1.4;
+text-align:left;
+width:80%;
+max-width:600px;
+min-height:120px;
 }
 
 @keyframes boot{
 0%{opacity:1}
-80%{opacity:1}
+85%{opacity:1}
 100%{opacity:0;visibility:hidden}
 }
 
@@ -47,36 +62,6 @@ justify-content:center;
 align-items:center;
 }
 
-.heart{
-position:absolute;
-color:#ff2e63;
-font-size:20px;
-animation:blink 1.2s infinite alternate;
-}
-
-.h1{top:80px;right:200px;}
-.h2{top:80px;right:170px;animation-delay:.3s;}
-.h3{top:80px;right:140px;animation-delay:.6s;}
-
-@keyframes blink{
-from{opacity:.3;transform:scale(.9);}
-to{opacity:1;transform:scale(1.1);}
-}
-
-.dino{
-position:absolute;
-bottom:60px;
-left:120px;
-font-size:50px;
-animation:breathe 3s ease-in-out infinite;
-}
-
-@keyframes breathe{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
 .desktop-window{
 width:85%;
 max-width:1100px;
@@ -87,12 +72,15 @@ box-shadow:10px 10px 0px rgba(0,0,0,.2);
 display:flex;
 flex-direction:column;
 position:absolute;
-animation:popIn .8s ease;
+opacity:0;
+transform:scale(.6);
+transition:all .8s cubic-bezier(.2,.8,.2,1);
+z-index:10;
 }
 
-@keyframes popIn{
-from{transform:scale(.8);opacity:0;}
-to{transform:scale(1);opacity:1;}
+.desktop-window.show{
+opacity:1;
+transform:scale(1);
 }
 
 .title-bar{
@@ -228,20 +216,40 @@ text-decoration:none;
 footer a:hover{
 text-decoration:underline;
 }
+
+.mini-window{
+position:absolute;
+width:260px;
+height:140px;
+background:#0f0f0f;
+color:#00ff88;
+border:2px solid #00ff88;
+font-family:'Press Start 2P',cursive;
+font-size:.6rem;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+box-shadow:5px 5px 0px rgba(0,255,136,.3);
+animation:flicker .12s infinite alternate;
+z-index:10000;
+}
+
+@keyframes flicker{
+0%{opacity:.6;transform:scale(.98);}
+100%{opacity:1;transform:scale(1.03);}
+}
 </style>
 </head>
 
 <body>
 
-<div class="boot-screen">Loading Portfolio...</div>
+<div class="boot-screen">
+<div class="boot-text">Initializing System...</div>
+<div class="terminal" id="terminal"></div>
+</div>
 
 <div class="desktop">
-
-<div class="heart h1">❤</div>
-<div class="heart h2">❤</div>
-<div class="heart h3">❤</div>
-
-<div class="dino">🦖</div>
 
 <div class="desktop-window" id="window">
 
@@ -290,6 +298,8 @@ this quarter, i’m excited to show my projects, learn new things, and keep expl
 <script>
 const windowEl=document.getElementById("window");
 const dragBar=document.getElementById("dragBar");
+const terminal=document.getElementById("terminal");
+
 let offsetX=0,offsetY=0,isDown=false;
 
 dragBar.addEventListener("mousedown",e=>{
@@ -306,6 +316,41 @@ windowEl.style.left=e.clientX-offsetX+"px";
 windowEl.style.top=e.clientY-offsetY+"px";
 windowEl.style.position="absolute";
 });
+
+const lines=[
+"Accessing mainframe...",
+"Bypassing firewall...",
+"Injecting payload...",
+"Decrypting files...",
+"System override complete."
+];
+
+let i=0;
+function typeLine(){
+if(i<lines.length){
+terminal.innerHTML+=lines[i]+"<br>";
+i++;
+setTimeout(typeLine,400);
+}
+}
+typeLine();
+
+function createMiniWindow(){
+const mini=document.createElement("div");
+mini.classList.add("mini-window");
+mini.style.top=Math.random()*(window.innerHeight-160)+"px";
+mini.style.left=Math.random()*(window.innerWidth-280)+"px";
+mini.innerHTML="⚠ SYSTEM BREACH ⚠";
+document.body.appendChild(mini);
+setTimeout(()=>{mini.remove();},400+Math.random()*600);
+}
+
+const breachInterval=setInterval(createMiniWindow,120);
+
+setTimeout(()=>{
+clearInterval(breachInterval);
+windowEl.classList.add("show");
+},3500);
 </script>
 
 </body>
